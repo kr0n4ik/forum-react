@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+div.header {
+  height: 42px;
+}
+
+.box {
+  border-width: 0px;
+  border-style: solid;
+  border-color: rgb(147, 157, 172, .5);
+  border-radius: 4px;
+  background: rgb(45, 48, 55);
+  box-shadow: inset rgba(255,255,255, .1) 0px 1px 0px;
+  color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+}
+
+.w-460 {
+  max-width: 460px;
+  margin: auto;
+}
