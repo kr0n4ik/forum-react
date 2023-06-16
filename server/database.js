@@ -114,6 +114,7 @@ class Database {
         if (!category) {
             return []
         }
+        let time = 0
         const result = []
         for (const cat of category) {
             const row = {
@@ -121,17 +122,30 @@ class Database {
                 title: cat.title,
                 description: cat.description,
                 icon: cat.icon,
-                count: 0
+                count: 0,
+                last: {}
             }
             const topics = await this.#conn.all("SELECT * FROM topics WHERE gid=:gid", {':gid': cat.id })
             for (const topic of topics) {
-                const posts = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid", {':tid': topic.id })
+                const posts = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid ORDER BY time", {':tid': topic.id })
                 row.count += posts.length
+                if (posts.length > 0 && posts[0].time > time) {
+                    const post = posts[0]
+                    const user = await this.#conn.get("SELECT * FROM users WHERE id=:uid", {
+                        ':uid': post.uid
+                    })
+                    row.last = {uid: post.uid, time: post.time, avatar: user.avatar, nick: user.nick}
+                    time = post.time
+                }
             }
             result.push(row)
         }
 
         return result
+    }
+
+    getLastPost(cid) {
+
     }
 } 
 

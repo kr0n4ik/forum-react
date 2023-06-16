@@ -10,7 +10,7 @@ const Login = () => {
     const onSendLogin = async (event) => {
         event.preventDefault()
         if (await RestService.onLogin(email, password)) {
-            navigate(-1)
+            navigate('/')
         } else {
             setError('Неверный пароль')
         }

@@ -48,6 +48,16 @@ const RestService = {
     },
     onLogout() {
         localStorage.setItem("user", null)
+    },
+    getCategory(gid) {
+        return axios
+            .get(HOST + `category`,{})
+            .then((response) => {
+                return response.data
+            })
+            .catch(err => {
+                return []
+            })
     }
 }
 
