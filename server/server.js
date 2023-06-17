@@ -58,7 +58,6 @@ app.post("/register", async function(req, res){
 app.get("/category", async function(req, res) {
     const data = await db.getCategory()
     if (data) {
-        console.log(data)
         return res.status(200).json(data)
     }
     return res.status(404)

@@ -134,7 +134,13 @@ class Database {
                     const user = await this.#conn.get("SELECT * FROM users WHERE id=:uid", {
                         ':uid': post.uid
                     })
-                    row.last = {uid: post.uid, time: post.time, avatar: user.avatar, nick: user.nick}
+                    row.last = {
+                        uid: post.uid, 
+                        time: post.time, 
+                        avatar: user.avatar, 
+                        nick: user.nick,
+                        title: topic.title
+                    }
                     time = post.time
                 }
             }
