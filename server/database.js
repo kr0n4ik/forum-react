@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path'
 import sqlite3 from 'sqlite3'
-import {open} from 'sqlite'
+import { open } from 'sqlite'
 
 class Database {
     #conn = null
@@ -9,7 +9,7 @@ class Database {
     async open(filename) {
         const dir = path.dirname(filename)
         if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, {recursive: true})
+            fs.mkdirSync(dir, { recursive: true })
         }
         filename = path.resolve(filename)
         // Open SQLite3 database file
@@ -52,9 +52,9 @@ class Database {
 
     async addPost(uid, tid, title, html) {
         await this.#conn.run('INSERT INTO posts (uid, tid, html) VALUES (:uid, :tid, :html)', {
-            ':uid' : uid,
-            ':tid' : tid,
-            ':html' : html,
+            ':uid': uid,
+            ':tid': tid,
+            ':html': html,
         })
     }
 
@@ -79,38 +79,64 @@ class Database {
 
     async addTopic(uid, cid, title, html) {
         const result = await this.#conn.run('INSERT INTO topics (gid, title) VALUES (:gid, :title)', {
-            ':gid' : cid,
-            ':title' : title
+            ':gid': cid,
+            ':title': title
         })
         return await this.#conn.run('INSERT INTO posts (uid, tid, html, time) VALUES (:uid, :tid, :html, :time)', {
-            ':uid' : uid,
-            ':tid' : result.lastID,
-            ':html' : html,
-            ':time' : Date.now()
+            ':uid': uid,
+            ':tid': result.lastID,
+            ':html': html,
+            ':time': Date.now()
         })
     }
 
     async getTopics(gid) {
-        const topics =  await this.#conn.all("SELECT * FROM topics WHERE gid=:gid", {
+        const topics = await this.#conn.all("SELECT * FROM topics WHERE gid=:gid", {
             ':gid': gid
         })
-        if (!topics) {
-            return []
-        }
+        let time = 0
         const result = []
         for (const topic of topics) {
-            const posts = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid", {':tid': topic.id })
+            const row = {
+                id: topic.id,
+                title: topic.title,
+                count: 0,
+                last: {}
+            }
+            const posts = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid ORDER BY time", { ':tid': topic.id })
+            if (posts.length > 0 && posts[0].time > time) {
+                row.count = posts.length
+                const post = posts[0]
+                const user = await this.#conn.get("SELECT * FROM users WHERE id=:uid", {
+                    ':uid': post.uid
+                })
+                row.last = {
+                    uid: post.uid,
+                    time: post.time,
+                    avatar: user.avatar,
+                    nick: user.nick,
+                    title: topic.title
+                }
+                time = post.time
+                result.push(row)
+            }
+        }
+        /*if (!topics) {
+            return []
+        }
+        for (const topic of topics) {
+            const posts = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid ORDER BY time", {':tid': topic.id })
             result.push({
                 id: topic.id,
                 title: topic.title,
                 count : posts.length
             })
-        }
+        }*/
         return result
     }
 
     async getCategory() {
-        const category =  await this.#conn.all("SELECT * FROM category", {})
+        const category = await this.#conn.all("SELECT * FROM category", {})
         if (!category) {
             return []
         }
@@ -125,9 +151,9 @@ class Database {
                 count: 0,
                 last: {}
             }
-            const topics = await this.#conn.all("SELECT * FROM topics WHERE gid=:gid", {':gid': cat.id })
+            const topics = await this.#conn.all("SELECT * FROM topics WHERE gid=:gid", { ':gid': cat.id })
             for (const topic of topics) {
-                const posts = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid ORDER BY time", {':tid': topic.id })
+                const posts = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid ORDER BY time", { ':tid': topic.id })
                 row.count += posts.length
                 if (posts.length > 0 && posts[0].time > time) {
                     const post = posts[0]
@@ -135,9 +161,9 @@ class Database {
                         ':uid': post.uid
                     })
                     row.last = {
-                        uid: post.uid, 
-                        time: post.time, 
-                        avatar: user.avatar, 
+                        uid: post.uid,
+                        time: post.time,
+                        avatar: user.avatar,
                         nick: user.nick,
                         title: topic.title
                     }
@@ -153,6 +179,6 @@ class Database {
     getLastPost(cid) {
 
     }
-} 
+}
 
 export default Database

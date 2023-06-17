@@ -58,6 +58,16 @@ const RestService = {
             .catch(err => {
                 return []
             })
+    },
+    getTopics(cid) {
+        return axios
+            .get(HOST + `topics/${cid}`, {})
+            .then((response) => {
+                return response.data
+            })
+            .catch(err => {
+                return []
+            })
     }
 }
 

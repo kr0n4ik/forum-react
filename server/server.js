@@ -63,4 +63,13 @@ app.get("/category", async function(req, res) {
     return res.status(404)
 })
 
+app.get("/topics/:cid", async function(req, res) {
+    const cid = parseInt(req.params['cid'])
+    const data = await db.getTopics(cid)
+    if (data) {
+        return res.status(200).json(data)
+    }
+    return res.status(404)
+})
+
 app.listen(4000)

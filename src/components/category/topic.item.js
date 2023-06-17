@@ -1,24 +1,21 @@
 import { Link } from "react-router-dom"
 
-const CategoryItem = ({cid, title, description, icon, count, nick, time, topic}) => {
+const TopicItem = ({tid, title, description, count, nick, time, topic, icon}) => {
     return (
         <div className="item d-flex align-items-center">
-            <div className="p-2">
-                <img src={`assets/${icon}.png`} className="wh-36"/>
-            </div>
             <div className="p-2 flex-fill">
                 <h4 className="t-lg">
-                    <Link to={`/category/${cid}`}>
+                    <Link to={`/topic/${tid}`}>
                         {title}
                     </Link>
                 </h4>
                 <p className="t-sm">
-                    {description}
+                    Автор {nick}, {time}
                 </p>
             </div>
             <div className="p-2 text-right">
-                <p className="t-md">{count}</p>
-                <p className="t-sm">постов</p>
+                <p className="t-sd">{count}</p>
+                <p className="t-sm">posts</p>
             </div>
             <div className="d-none d-xl-block">
                 <a href="#">
@@ -27,14 +24,13 @@ const CategoryItem = ({cid, title, description, icon, count, nick, time, topic})
             </div>
             <div className="p-2 d-none d-lg-block">
                 <p className="t-md text-truncate">
-                    {topic}
+                    {nick}
                 </p>
                 <p className="t-sm text-nowrap">
-                    Автор {nick}, {time}
+                    {time}
                 </p>
             </div>
         </div>
     )
 }
-
-export default CategoryItem
+export default TopicItem
