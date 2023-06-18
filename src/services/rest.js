@@ -68,6 +68,21 @@ const RestService = {
             .catch(err => {
                 return []
             })
+    },
+    addTopic(cid, title, html) {
+        return axios
+            .post(HOST + "topic/add", {
+                title: title,
+                html: html,
+                cid: cid,
+                token: this.token
+            })
+            .then(response => {
+                return true
+            })
+            .catch(err => {
+                return false
+            })
     }
 }
 

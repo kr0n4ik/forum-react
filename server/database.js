@@ -59,7 +59,7 @@ class Database {
     }
 
     async getPosts(tid) {
-        const rows = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid", {
+        const rows = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid ORDER BY time", {
             ':tid': tid
         })
         const result = []
@@ -78,9 +78,10 @@ class Database {
     }
 
     async addTopic(uid, cid, title, html) {
-        const result = await this.#conn.run('INSERT INTO topics (gid, title) VALUES (:gid, :title)', {
+        const result = await this.#conn.run('INSERT INTO topics (gid, title, view) VALUES (:gid, :title, :view)', {
             ':gid': cid,
-            ':title': title
+            ':title': title,
+            ':view': 0
         })
         return await this.#conn.run('INSERT INTO posts (uid, tid, html, time) VALUES (:uid, :tid, :html, :time)', {
             ':uid': uid,

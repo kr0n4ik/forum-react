@@ -14,7 +14,7 @@ const Category = () => {
     return (
         <>
         <div className="text-end pb-3">
-            <Link to={`/topic/add/${cid}`} relative="path" className="btn btn-secondary">Create new topic</Link>
+            <Link to={`/topic/add/${cid}`} relative="path" className="btn btn-secondary">Новая тема</Link>
         </div>
         <div className="box">
             <span className="head"></span>
