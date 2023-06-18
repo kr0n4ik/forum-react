@@ -83,6 +83,30 @@ const RestService = {
             .catch(err => {
                 return false
             })
+    },
+    getPosts(tid) {
+        return axios
+            .get(HOST + `posts/${tid}`, {})
+            .then((response) => {
+                return response.data
+            })
+            .catch(err => {
+                return []
+            })
+    },
+    addPost(tid, html) {
+        return axios
+            .post(HOST + "post/add", {
+                html: html,
+                tid: tid,
+                token: this.token
+            })
+            .then((response) => {
+                return true
+            })
+            .catch(err => {
+                return false
+            })
     }
 }
 

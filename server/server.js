@@ -90,4 +90,31 @@ app.post("/topic/add", async function(req, res) {
     return res.status(200).json({'ok':true})
 })
 
+app.get("/posts/:tid", async function(req, res) {
+    const tid = parseInt(req.params['tid'])
+    const data = await db.getPosts(tid)
+    if (data) {
+        return res.status(200).json(data)
+    }
+    return res.status(404)
+})
+
+app.post("/post/add", async function(req, res) {
+    const {tid, html, token} = req.body
+    if (!token) {
+        return res.status(401)
+    }
+    let decode = null
+    try {
+		decode = jwt.verify(token, key)
+	} catch (e) {
+		if (e instanceof jwt.JsonWebTokenError) {
+			return res.status(401).end()
+		}
+		return res.status(400).end()
+	}
+    await db.addPost(decode.id, tid, html)
+    return res.status(200).json({'ok':true})
+})
+
 app.listen(4000)

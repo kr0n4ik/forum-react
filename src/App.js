@@ -5,6 +5,7 @@ import Register from './components/register/register';
 import Home from './components/home/home';
 import Category from './components/category/category';
 import TopicAdd from './components/category/topic.add';
+import Topic from './components/topic/topic';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Header/>
       <Routes>
         <Route path='/' element={<Home/>} />
+        <Route path='/topic/:tid' element={<Topic/>} />
         <Route path='/topic/add/:cid' element={<TopicAdd/>} />
         <Route path='/register' element={<Register/>} />
         <Route path='/login' element={<Login/>} />

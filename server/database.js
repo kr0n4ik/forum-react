@@ -50,11 +50,12 @@ class Database {
         return row
     }
 
-    async addPost(uid, tid, title, html) {
-        await this.#conn.run('INSERT INTO posts (uid, tid, html) VALUES (:uid, :tid, :html)', {
+    async addPost(uid, tid, html) {
+        await this.#conn.run('INSERT INTO posts (uid, tid, html, time) VALUES (:uid, :tid, :html, :time)', {
             ':uid': uid,
             ':tid': tid,
             ':html': html,
+            ':time': Date.now()
         })
     }
 
@@ -68,6 +69,7 @@ class Database {
                 ':uid': row.uid
             })
             result.push({
+                'id': row.id,
                 'html': row.html,
                 'time': row.time,
                 'nick': user.nick,
