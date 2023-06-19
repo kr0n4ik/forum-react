@@ -20,6 +20,7 @@ const Category = () => {
             <span className="head"></span>
             <div>
             {
+                (items.length == 0) ? <h4 className="p-3 text-center">В этой категории нет тем</h4> : 
                 items.map(item => (
                     <TopicItem key={item.id} tid={item.id} title={item.title} description={item.description} icon={item.icon} count={item.count} nick={item.last.nick} time={item.last.time} topic={item.last.title} />
                 ))

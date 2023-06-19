@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import RestService from '../../services/rest';
 import { useParams, useNavigate } from "react-router-dom";
 import PostItem from "./post.item";
+import Paginator from "../paginator/paginator";
 
 
 function Topic() {
@@ -11,6 +12,7 @@ function Topic() {
     const { tid } = useParams()
     const [items, setItems] = useState([])
     const [value, setValue] = useState('')
+    const [current, setCurrent] = useState(0)
     useEffect(() => {
         RestService.getPosts(tid).then(result => {
             setItems(result)
@@ -24,18 +26,25 @@ function Topic() {
             })
         }) 
     }
+
+    const count = 10
+    const data = items.slice(current * count, (current + 1) * count)
+    const paginate = number => setCurrent(number)
+
     return (
         <>
+            <Paginator total={items.length} count={count} current={current} paginate={paginate}/>
             {
-                items.map(item => (
+                data.map(item => (
                     <PostItem key={item.id} html={item.html} nick={item.nick} time={item.time} avatar={item.avatar}/>
                 ))
             }
+            <Paginator total={items.length} count={count} current={current} paginate={paginate}/>
             <div className="box">
                 <span className="head"></span>
                 <ReactQuill value={value} onChange={setValue} />
                 <div className="text-end pb-3">
-                    <button className="btn btn-secondary" onClick={sendClick}>Submit Reply</button>
+                    <button className="btn btn-secondary" onClick={sendClick}>Отправить ответ</button>
                 </div>
             </div>
             <div className="box p-3" >

@@ -143,7 +143,6 @@ class Database {
         if (!category) {
             return []
         }
-        let time = 0
         const result = []
         for (const cat of category) {
             const row = {
@@ -154,6 +153,7 @@ class Database {
                 count: 0,
                 last: {}
             }
+            let time = 0
             const topics = await this.#conn.all("SELECT * FROM topics WHERE gid=:gid", { ':gid': cat.id })
             for (const topic of topics) {
                 const posts = await this.#conn.all("SELECT * FROM posts WHERE tid=:tid ORDER BY time", { ':tid': topic.id })

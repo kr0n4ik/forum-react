@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const TopicItem = ({tid, title, description, count, nick, time, topic, icon}) => {
+const TopicItem = ({tid, title, count, nick, time, topic, icon}) => {
     return (
         <div className="item d-flex align-items-center">
             <div className="p-2 flex-fill">
@@ -14,7 +14,7 @@ const TopicItem = ({tid, title, description, count, nick, time, topic, icon}) =>
                 </p>
             </div>
             <div className="p-2 text-right">
-                <p className="t-sd">{count}</p>
+                <p className="t-md">{count}</p>
                 <p className="t-sm">posts</p>
             </div>
             <div className="d-none d-xl-block">
