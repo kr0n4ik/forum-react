@@ -7,13 +7,22 @@ const Header = () => {
         navigate('/')
     }
     return (
-        <div className="header d-flex align-items-center">
-            <div className="p-2"><Link to='login'>Sign In</Link></div>
-            <div className="p-2"><Link to='register'>Sign Up</Link></div>
-            <div className="p-2"><button onClick={RestService.onLogout}>Logout</button></div>
-            <div className="p-2"><button onClick={goHome}>Домой</button></div>
-            <div className="p-2"><i className="bi bi-alarm-fill" style={{ fontSize: 24 }}></i></div>
-        </div>
+        <>
+            <div className='box'>
+                <span className="head"></span>
+                <h2 className='p-4'>
+                    <Link to='/' >
+                        Home
+                    </Link>
+                </h2>
+            </div>
+            <div className="header d-flex align-items-center">
+                <div className="p-2"><Link to='login'>Sign In</Link></div>
+                <div className="p-2"><Link to='register'>Sign Up</Link></div>
+                <div className="p-2"><button onClick={RestService.onLogout}>Logout</button></div>
+            </div>
+        </>
+
     )
 }
 
