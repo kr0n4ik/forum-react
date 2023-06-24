@@ -28,7 +28,7 @@ div.header {
   margin-bottom: 20px;
 }
 
-.box .head {
+.box span.head {
   content: '';
   display: block;
   background: rgb(217, 157, 86);
@@ -43,6 +43,10 @@ div.header {
   transform: translate3d(0, 0, 0);
   height: 6px;
   box-sizing: border-box;
+}
+.box div.head {
+    border-bottom: 1px dashed rgba(218, 230, 243, .15);
+    height: 42px;
 }
 
 .w-460 {
@@ -75,9 +79,9 @@ div.header {
   font-size: 36px;
 }
 
-img.wh-110 {
-  width: 110px;
-  height: 110px;
+.wh-110 {
+  width: 110px !important;
+  height: 110px !important;
   color: inherit;
   border-radius: 4px;
 }

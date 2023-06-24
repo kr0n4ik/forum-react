@@ -12,6 +12,12 @@ const Utils = {
             return two
         }
         return one
+    },
+    GroupIdToString(id) {
+        if (id === 0) {
+            return 'Пользователь'
+        }
     }
 }
+
 export default Utils

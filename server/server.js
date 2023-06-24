@@ -8,6 +8,9 @@ const key = '1a2b-3c4d-5e6f-7g8h'
 
 const db = new Database()
 const app = express()
+const react = express()
+
+react.use(express.static('../build/'));
 
 app.use(cors())
 app.use(express.json())
@@ -127,3 +130,4 @@ app.post("/post/add", async function(req, res) {
 })
 
 app.listen(4000)
+react.listen(80)

@@ -102,7 +102,8 @@ class Database {
                     'nick': user.nick,
                     'group': user.group_id,
                     'avatar': user.avatar,
-                    'posts': user.posts
+                    'posts': user.posts,
+                    'reputation': user.reputation
                 }
             })
         }
