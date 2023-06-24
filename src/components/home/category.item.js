@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
+import Moment from 'react-moment'
+import Utils from "../../utils/utils"
 
-const CategoryItem = ({ cid, title, description, icon, count, nick, time, topic }) => {
+const CategoryItem = ({ cid, title, description, icon, count, nick, time, topic, uid , tid, avatar}) => {
     return (
         <div className="item d-flex align-items-center">
             <div className="p-2">
@@ -20,19 +22,22 @@ const CategoryItem = ({ cid, title, description, icon, count, nick, time, topic 
                 <>
                     <div className="p-2">
                         <p className="t-md text-right">{count}</p>
-                        <p className="t-sm">постов</p>
+                        <p className="t-sm">{Utils.getNoun(count, 'пост', 'поста', 'постов')}</p>
                     </div>
                     <div className="d-none d-xl-block">
-                        <a href="#">
-                            <img className="wh-36" src="/assets/show-offliners_3522.png" />
-                        </a>
+                        <Link to={`/profile/${uid}`}>
+                            <img className="wh-36" src={`/assets/${avatar}.png`} />
+                        </Link>
                     </div>
                     <div className="p-2 d-none d-lg-block w-250">
-                        <p className="t-md text-truncate">
+                        <Link className="t-md text-truncate" to={`/topic/${tid}`}>
                             {topic}
-                        </p>
+                        </Link>
                         <p className="t-sm text-nowrap">
-                            Автор {nick}, {time}
+                            <Link className="t-sm" to={`/profile/${uid}`}>
+                                Автор {nick}
+                            </Link>,&nbsp; 
+                            <Moment unix fromNow>{time}</Moment>
                         </p>
                     </div>
                 </>

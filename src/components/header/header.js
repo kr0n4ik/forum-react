@@ -1,28 +1,36 @@
-import { Link, useNavigate } from 'react-router-dom';
-import RestService from '../../services/rest';
+import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/use.auth';
 
 const Header = () => {
-    const navigate = useNavigate()
-    const goHome = () => {
-        navigate('/')
-    }
+    const {auth} = useAuth()
+    console.log(auth)
     return (
         <>
-            <div className='box'>
+            <div className='box d-none d-md-block'>
                 <span className="head"></span>
-                <h2 className='p-4'>
-                    <Link to='/' >
-                        Home
-                    </Link>
-                </h2>
-            </div>
-            <div className="header d-flex align-items-center">
-                <div className="p-2"><Link to='login'>Sign In</Link></div>
-                <div className="p-2"><Link to='register'>Sign Up</Link></div>
-                <div className="p-2"><button onClick={RestService.onLogout}>Logout</button></div>
+                <div className='d-flex align-items-center'>
+                    <h2 className='p-4 flex-fill'>
+                        <Link to='/' >
+                            Home
+                        </Link>
+                    </h2>
+                    <div className='p-2 d-flex align-items-center'>
+                        {
+                            (auth?.id) ? 
+                            <>
+                                <Link to={`profile/${auth.id}`} className='btn btn-secondary'><i className="bi bi-person-fill hbtn"></i></Link>
+                                &nbsp;
+                                <Link to='logout' className='btn btn-secondary'><i className="bi bi-escape hbtn"></i></Link>
+                            </> : <>
+                                <Link to='register' className='btn btn-secondary'><i className="bi bi-universal-access hbtn"></i></Link>
+                                &nbsp;
+                                <Link to='login' className='btn btn-secondary'><i className="bi bi-fingerprint hbtn"></i></Link>
+                            </>
+                        }
+                    </div>
+                </div>
             </div>
         </>
-
     )
 }
 

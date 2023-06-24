@@ -6,6 +6,7 @@ const Home = () => {
     const [items, setItems] = useState([])
     useLayoutEffect(() => {
         RestService.getCategory().then(result => {
+            console.log(result)
             setItems(result)
         })
     }, [])
@@ -15,7 +16,7 @@ const Home = () => {
                 <div>
                     {
                         items.map(item => (
-                            <CategoryItem key={item.id} cid={item.id} title={item.title} description={item.description} icon={item.icon} count={item.count} nick={item.last.nick} time={item.last.time} topic={item.last.title} />
+                            <CategoryItem key={item.id} cid={item.id} title={item.title} description={item.description} icon={item.icon} count={item.count} nick={item.user.nick} avatar={item.user.avatar} time={item.post.time} topic={item.post.title} uid={item.user.uid} tid={item.post.tid}/>
                         ))
                     }
                 </div>

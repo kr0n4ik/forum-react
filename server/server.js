@@ -99,6 +99,15 @@ app.get("/posts/:tid", async function(req, res) {
     return res.status(404)
 })
 
+app.get("/profile/:uid", async function(req, res) {
+    const uid = parseInt(req.params['uid'])
+    const data = await db.getProfile(uid)
+    if (data) {
+        return res.status(200).json(data)
+    }
+    return res.status(404)
+})
+
 app.post("/post/add", async function(req, res) {
     const {tid, html, token} = req.body
     if (!token) {

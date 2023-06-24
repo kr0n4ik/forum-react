@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RestService from "../../services/rest";
+import useAuth from "../../hooks/use.auth";
 
 const Login = () => {
     const navigate = useNavigate()
     const [error, setError] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const {setAuth} = useAuth()
     const onSendLogin = async (event) => {
         event.preventDefault()
-        if (await RestService.onLogin(email, password)) {
+        const info = await RestService.onLogin(email, password)
+        if (info) {
+            setAuth(info)
             navigate('/')
         } else {
             setError('Неверный пароль')

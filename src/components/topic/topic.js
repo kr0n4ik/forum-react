@@ -36,7 +36,7 @@ function Topic() {
             <Paginator total={items.length} count={count} current={current} paginate={paginate}/>
             {
                 data.map(item => (
-                    <PostItem key={item.id} html={item.html} nick={item.nick} time={item.time} avatar={item.avatar}/>
+                    <PostItem key={item.id} html={item.html} nick={item.user.nick} time={item.time} avatar={item.user.avatar} posts={item.user.posts} uid={item.user.uid}/>
                 ))
             }
             <Paginator total={items.length} count={count} current={current} paginate={paginate}/>

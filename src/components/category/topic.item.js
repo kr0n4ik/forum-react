@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
+import Moment from 'react-moment'
+import Utils from "../../utils/utils"
 
-const TopicItem = ({tid, title, count, nick, time, topic, icon}) => {
+const TopicItem = ({ tid, title, count, nick, time, uid, avatar, joined, view }) => {
     return (
         <div className="item d-flex align-items-center">
             <div className="p-2 flex-fill">
@@ -10,24 +12,24 @@ const TopicItem = ({tid, title, count, nick, time, topic, icon}) => {
                     </Link>
                 </h4>
                 <p className="t-sm">
-                    Автор {nick}, {time}
+                    Автор {nick}, <Moment unix fromNow>{time}</Moment>
                 </p>
             </div>
             <div className="p-2 text-right">
-                <p className="t-md">{count}</p>
-                <p className="t-sm">posts</p>
+                <p className="t-sm">{view} {Utils.getNoun(view, 'просмотр', 'просмотра', 'просмотров')}</p>
+                <p className="t-sm">{count} {Utils.getNoun(count, 'пост', 'поста', 'постов')}</p>
             </div>
             <div className="d-none d-xl-block">
-                <a href="#">
-                    <img className="wh-36" src="/assets/show-offliners_3522.png"/>
-                </a>
+                <Link to={`/profile/${uid}`}>
+                    <img className="wh-36" src={`/assets/${avatar}.png`} />
+                </Link>
             </div>
             <div className="p-2 d-none d-lg-block">
-                <p className="t-md text-truncate">
+                <Link to={`/profile/${uid}`} className="t-sm text-truncate">
                     {nick}
-                </p>
+                </Link>
                 <p className="t-sm text-nowrap">
-                    {time}
+                    <Moment unix fromNow>{joined}</Moment>
                 </p>
             </div>
         </div>

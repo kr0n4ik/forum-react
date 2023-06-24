@@ -5,7 +5,7 @@ const HOST = 'http://localhost:4000/';
 const RestService = {
     get token() {
         const user = JSON.parse(localStorage.getItem('user'));
-        return (user && user.token) ? user.token : null
+        return user?.token
     },
     onLogin(email, password) {
         return axios
@@ -14,16 +14,14 @@ const RestService = {
                 password,
             })
             .then((res) => {
-                console.log(res)
                 if (res.data.token) {
                     localStorage.setItem("user", JSON.stringify(res.data))
-                    return true
+                    return res.data
                 }
-                return false
+                return null
             })
             .catch(err => {
-                console.log(err)
-                return false
+                return null
             })
     },
     onRegister(name, email, password) {
@@ -92,6 +90,16 @@ const RestService = {
             })
             .catch(err => {
                 return []
+            })
+    },
+    getProfile(uid) {
+        return axios
+            .get(HOST + `profile/${uid}`, {})
+            .then((response) => {
+                return response.data
+            })
+            .catch(err => {
+                return false
             })
     },
     addPost(tid, html) {
