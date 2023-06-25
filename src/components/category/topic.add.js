@@ -19,7 +19,6 @@ const TopicAdd = () => {
     return (
         <>
         <div className="box">
-                <div className='head'></div>
                 <h1 className='p-3'>Новая тема</h1>
             </div>
             <div className="box p-3">

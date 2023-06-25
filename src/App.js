@@ -8,10 +8,11 @@ import TopicAdd from './components/category/topic.add';
 import Topic from './components/topic/topic';
 import Profile from './components/profile/profile';
 import Logout from './components/logout/logout';
+import Footer from './components/footer/footer';
 
 function App() {
     return (
-        <div className='body h-100'>
+        <div className='body h-100 p-md-3'>
             <BrowserRouter>
                 <Header/>
                 <Routes>
@@ -26,6 +27,7 @@ function App() {
                     <Route path='/logout' element={<Logout/>} />
                     <Route path='*' element={'Error'} />
                 </Routes>
+                <Footer/>
             </BrowserRouter>
         </div>
     )

@@ -8,7 +8,7 @@ const Utils = {
         if (n === 1) {
             return one
         }
-        if (n > 2 && n <= 4) {
+        if (n >= 2 && n <= 4) {
             return two
         }
         return one

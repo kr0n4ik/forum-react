@@ -18,16 +18,17 @@ const Paginator = ({ total, count, current, paginate }) => {
     }
 
     return (
-        <ul className="pagination">
-            <li className="page-item">
-                <a className="page-link" href="#" onClick={() => onPrevious()}>Пред.</a></li>
+        (lis.length > 1) ?
+        <div className="btn-group pb-3">
+                <button type="button" className="btn btn-secondary" onClick={() => onPrevious()}>Пред.</button>
                 {
                     lis.map(li => (
-                        <li key={li} className={current == li ? "page-item active" : "page-item"} ><a className="page-link" href="#" onClick={() => paginate(li)}>{li + 1}</a></li>
+                        <button key={li} className={current == li ? "btn btn-primary" : "btn btn-secondary"} onClick={() => paginate(li)}>{li + 1}</button>
                     ))
                 }
-            <li className="page-item"><a className="page-link" href="#" onClick={() => onNext()}>След.</a></li>
-        </ul>
+            <button type="button" className="btn btn-secondary" onClick={() => onNext()}>След.</button>
+        </div>
+        :null
     )
 }
 export default Paginator
