@@ -6,6 +6,7 @@ import Database  from "./database.js";
 
 const key = '1a2b-3c4d-5e6f-7g8h'
 
+
 const db = new Database()
 const app = express()
 const react = express()
@@ -19,14 +20,15 @@ await db.open('forum.sqlite3')
 
 app.post("/login", async function(req, res){
     const {email, password} = req.body
-    const hash = await bcrypt.hash(password, 15)
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(password, salt)
     const user = await db.getUser(email)
     if (!user) {
         return res.status(401).json('USER_NOT_FOUND')
     }
-    //if (user.password != hash) {
-       // return res.status(401).json('INVALIDE_PASSWORD')
-   // }
+    if (bcrypt.compareSync(user.password, hash)) {
+        return res.status(401).json('INVALIDE_PASSWORD')
+    }
     return res.status(200).json({
         id: user.id,
         token: jwt.sign({
@@ -45,7 +47,8 @@ app.post("/register", async function(req, res){
     if (user) {
         return res.status(401).json('USER_FOUND')
     }
-    const hash = await bcrypt.hash(password, 15)
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(password, salt)
     const id = await db.addUser(name, email, hash)
     if (!id) {
         return res.status(500).json('ERROR_BD')

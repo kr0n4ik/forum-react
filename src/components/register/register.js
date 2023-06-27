@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RestService from "../../services/rest";
+import useAuth from "../../hooks/use.auth";
 
 const Register = () => {
     const navigate = useNavigate()
@@ -9,14 +10,18 @@ const Register = () => {
     const [password, setPassword] = useState("")
     const [repassword, setRePassword] = useState("")
     const [name, setName] = useState("")
-
+    const { setAuth } = useAuth()
     const onSendRegister = async (event) => {
         event.preventDefault()
-        if (RestService.onRegister(name, email, password)) {
-
+        const info = RestService.onRegister(name, email, password)
+        if (info) {
+            setAuth(info)
+            navigate('/')
+        } else {
+            setError('Ошибка регистрации')
         }
     }
-    
+
     return (
         <div className="w-460">
             {error && <div className="alert alert-danger" role="alert">{error}</div>}

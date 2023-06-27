@@ -33,10 +33,10 @@ const RestService = {
             })
             .then((res) => {
                 console.log(res)
-                //if (res.data.token) {
-                   // localStorage.setItem("token", JSON.stringify(res.data))
-                    //return true
-                //}
+                if (res.data.token) {
+                    localStorage.setItem("token", JSON.stringify(res.data))
+                    return res.data
+                }
                 return false
             })
             .catch(err => {

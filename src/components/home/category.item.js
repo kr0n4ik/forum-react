@@ -20,16 +20,16 @@ const CategoryItem = ({ cid, title, description, icon, count, nick, time, topic,
             </div>
             {(count == 0) ? null :
                 <>
-                    <div className="p-2">
+                    <div className="p-2 w-1s5">
                         <p className="t-md text-right">{count}</p>
                         <p className="t-sm">{Utils.getNoun(count, 'пост', 'поста', 'постов')}</p>
                     </div>
-                    <div className="d-none d-xl-block">
+                    <div className="d-none d-xl-block w-s">
                         <Link to={`/profile/${uid}`}>
                             <img className="wh-36" src={`/assets/${avatar}.png`} />
                         </Link>
                     </div>
-                    <div className="p-2 d-none d-lg-block w-250">
+                    <div className="p-2 d-none d-lg-block col-5">
                         <Link className="t-md text-truncate" to={`/topic/${tid}`}>
                             {topic}
                         </Link>

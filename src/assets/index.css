@@ -166,3 +166,31 @@ h2.t-md {
 .w-40 {
     width: 40px;
 }
+
+.w-80 {
+    width: 80px;
+}
+
+.w-s {
+    width: 52px;
+}
+
+.w-1s5 {
+    width: 78px;
+}
+
+.item .col-0 {
+    width: 52px;
+}
+.item .col-2 {
+    width: 100px;
+}
+.item .col-3 {
+    width: 150px;
+}
+.item .col-4 {
+    width: 200px;
+}
+.item .col-5 {
+    width: 250px;
+}
