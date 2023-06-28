@@ -29,11 +29,11 @@ const CategoryItem = ({ cid, title, description, icon, count, nick, time, topic,
                             <img className="wh-36" src={`/assets/${avatar}.png`} />
                         </Link>
                     </div>
-                    <div className="p-2 d-none d-lg-block col-5">
-                        <Link className="t-md text-truncate" to={`/topic/${tid}`}>
+                    <div className="p-2 d-none d-lg-block lastPost">
+                        <Link className="t-md" to={`/topic/${tid}`}>
                             {topic}
                         </Link>
-                        <p className="t-sm text-nowrap">
+                        <p className="t-sm">
                             <Link className="t-sm" to={`/profile/${uid}`}>
                                 Автор {nick}
                             </Link>,&nbsp; 

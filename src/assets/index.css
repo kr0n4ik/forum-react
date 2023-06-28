@@ -194,3 +194,10 @@ h2.t-md {
 .item .col-5 {
     width: 250px;
 }
+
+.lastPost {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 260px;
+}

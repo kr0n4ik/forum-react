@@ -15,7 +15,7 @@ const PostItem = ({ time, nick, html, avatar, uid, posts, group, reputation }) =
                             <img className="w-40 h-40" src={`/assets/${avatar}.png`} alt="avatar" />
                         </Link>
                         <div className='position-absolute top-100 start-0 translate-middle'>
-                            <img src="/assets/awards/award_0.png"/>
+                            <img src="/assets/awards/award_0.png" />
                         </div>
                     </div>
                 </div>
@@ -25,8 +25,10 @@ const PostItem = ({ time, nick, html, avatar, uid, posts, group, reputation }) =
                     </Link>
                     <Moment unix fromNow>{time}</Moment>
                 </div>
-                <div className="ml-auto p-2 text-left">
-                    <i className="bi bi-three-dots"></i>
+                <div className="p-2">
+                    <button class="btn btn-secondary" type="button">
+                        <i className="bi bi-three-dots"></i>
+                    </button>
                 </div>
             </div>
             <div className="d-flex">
@@ -37,7 +39,7 @@ const PostItem = ({ time, nick, html, avatar, uid, posts, group, reputation }) =
                                 <img className="wh-110" src={`/assets/${avatar}.png`} alt="avatar" />
                             </Link>
                             <div className='position-absolute top-100 start-0 translate-middle'>
-                                <img src="/assets/awards/award_0.png"/>
+                                <img src="/assets/awards/award_0.png" />
                             </div>
                         </div>
                     </div>
