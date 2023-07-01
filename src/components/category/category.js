@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import TopicItem from "./topic.item";
 import RestService from "../../services/rest";
-import useAuth from '../../hooks/use.auth';
 import Paginator from "../paginator/paginator";
+import { UserContext } from "../../services/provider";
 
 const Category = () => {
-    const { auth } = useAuth()
     const { cid } = useParams()
+    const { auth } = useContext(UserContext)
     const [items, setItems] = useState([])
     const [current, setCurrent] = useState(0)
     useEffect(() => {
@@ -38,7 +38,7 @@ const Category = () => {
 
 
                 {
-                    (data.length == 0) ? <h4 className="p-3 text-center">В этой категории нет тем</h4> :
+                    (data.length === 0) ? <h4 className="p-3 text-center">В этой категории нет тем</h4> :
                         data.map(item => (
                             <TopicItem key={item.id} tid={item.id} title={item.title} count={item.count} nick={item.user.nick} time={item.post.time} uid={item.user.uid} avatar={item.user.avatar} joined={item.user.joined} view={item.view} />
                         ))

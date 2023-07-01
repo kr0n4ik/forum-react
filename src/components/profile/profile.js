@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import RestService from "../../services/rest"
 import { useParams } from "react-router-dom"
 import Moment from 'react-moment'
-import useAuth from "../../hooks/use.auth"
+import { UserContext } from "../../services/provider";
 
 const Profile = () => {
-    const { auth } = useAuth()
     const { uid } = useParams()
+    const { auth } = useContext(UserContext)
     const [data, setData] = useState('')
     useEffect(() => {
         RestService.getProfile(uid).then(result => {
@@ -19,7 +19,7 @@ const Profile = () => {
         <div className="box">
             <div className="d-flex align-self-end p-2">
                 {
-                    (auth?.id == uid) ?
+                    (auth?.id === uid) ?
                         <div className="btn-group w-auto ms-auto" role="group" aria-label="Basic example">
                             <button type="button" className="btn btn-primary">Left</button>
                             <button type="button" className="btn btn-primary">Middle</button>

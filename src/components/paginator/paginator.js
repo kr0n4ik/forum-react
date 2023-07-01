@@ -23,7 +23,7 @@ const Paginator = ({ total, count, current, paginate }) => {
                 <button type="button" className="btn btn-secondary" onClick={() => onPrevious()}>Пред.</button>
                 {
                     lis.map(li => (
-                        <button key={li} className={current == li ? "btn btn-primary" : "btn btn-secondary"} onClick={() => paginate(li)}>{li + 1}</button>
+                        <button key={li} className={current === li ? "btn btn-primary" : "btn btn-secondary"} onClick={() => paginate(li)}>{li + 1}</button>
                     ))
                 }
             <button type="button" className="btn btn-secondary" onClick={() => onNext()}>След.</button>

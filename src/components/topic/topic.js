@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import RestService from '../../services/rest';
 import { useParams, useNavigate, Link } from "react-router-dom";
 import PostItem from "./post.item";
 import Paginator from "../paginator/paginator";
-import useAuth from '../../hooks/use.auth';
+import { UserContext } from "../../services/provider";
 
 
 function Topic() {
     const navigate = useNavigate()
-    const { auth } = useAuth()
     const { tid } = useParams()
     const [items, setItems] = useState([])
     const [value, setValue] = useState('')
     const [current, setCurrent] = useState(0)
+    const { auth } = useContext(UserContext)
     useEffect(() => {
         RestService.getPosts(tid).then(result => {
             setItems(result)

@@ -21,7 +21,7 @@ const TopicItem = ({ tid, title, count, nick, time, uid, avatar, joined, view })
             </div>
             <div className="d-none d-xl-block col-0">
                 <Link to={`/profile/${uid}`}>
-                    <img className="wh-36" src={`/assets/${avatar}.png`} />
+                    <img className="wh-36" src={`/assets/${avatar}.png`} alt="avatar" />
                 </Link>
             </div>
             <div className="p-2 d-none d-lg-block col-2">

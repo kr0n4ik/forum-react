@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import RestService from "../../services/rest";
-import useAuth from "../../hooks/use.auth";
+import { UserContext } from "../../services/provider";
 
 const Register = () => {
     const navigate = useNavigate()
@@ -10,7 +10,7 @@ const Register = () => {
     const [password, setPassword] = useState("")
     const [repassword, setRePassword] = useState("")
     const [name, setName] = useState("")
-    const { setAuth } = useAuth()
+    const { setAuth } = useContext(UserContext)
     const onSendRegister = async (event) => {
         event.preventDefault()
         const info = RestService.onRegister(name, email, password)

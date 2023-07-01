@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
-import useAuth from '../../hooks/use.auth';
+import { UserContext } from "../../services/provider";
+import { useContext } from 'react';
 
 const Header = () => {
-    const { auth } = useAuth()
+    const { auth } = useContext(UserContext)
     return (
         <>
             <div className='d-block d-md-none mobile-header mb-3 d-flex align-items-center p-2'>
                 <div className='flex-fill d-flex align-items-center'>
-                    <img src="/logo.png" className='m-2' />
+                    <img src="/logo.png" className='m-2' alt='forum' />
                     <h2>Форум</h2>
                 </div>
                 <div className='p-2 d-flex align-items-center'>
@@ -30,7 +31,7 @@ const Header = () => {
             <div className='box d-none d-md-block'>
                 <span className="head"></span>
                 <div className='d-flex align-items-center'>
-                    <img src="/logo.png" className='p-2' />
+                    <img src="/logo.png" className='p-2' alt='logo' />
                     <h2 className='flex-fill'>
                         <Link to='/' >
                             Home

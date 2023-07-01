@@ -9,25 +9,28 @@ import Topic from './components/topic/topic';
 import Profile from './components/profile/profile';
 import Logout from './components/logout/logout';
 import Footer from './components/footer/footer';
+import { UserProvider } from './services/provider';
 
 function App() {
     return (
         <div className='body h-100 p-md-3'>
             <BrowserRouter>
-                <Header/>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/profile' element={<Profile />} />
-                    <Route path='/profile/:uid' element={<Profile />} />
-                    <Route path='/topic/:tid' element={<Topic />} />
-                    <Route path='/topic/add/:cid' element={<TopicAdd />} />
-                    <Route path='/register' element={<Register />} />
-                    <Route path='/login' element={<Login/>} />
-                    <Route path='/category/:cid' element={<Category />} />
-                    <Route path='/logout' element={<Logout/>} />
-                    <Route path='*' element={'Error'} />
-                </Routes>
-                <Footer/>
+                <UserProvider>
+                    <Header />
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/profile' element={<Profile />} />
+                        <Route path='/profile/:uid' element={<Profile />} />
+                        <Route path='/topic/:tid' element={<Topic />} />
+                        <Route path='/topic/add/:cid' element={<TopicAdd />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/category/:cid' element={<Category />} />
+                        <Route path='/logout' element={<Logout />} />
+                        <Route path='*' element={'Error'} />
+                    </Routes>
+                    <Footer />
+                </UserProvider>
             </BrowserRouter>
         </div>
     )

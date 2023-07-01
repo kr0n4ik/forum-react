@@ -15,7 +15,7 @@ const PostItem = ({ time, nick, html, avatar, uid, posts, group, reputation }) =
                             <img className="w-40 h-40" src={`/assets/${avatar}.png`} alt="avatar" />
                         </Link>
                         <div className='position-absolute top-100 start-0 translate-middle'>
-                            <img src="/assets/awards/award_0.png" />
+                            <img src="/assets/awards/award_0.png" alt="awards"/>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@ const PostItem = ({ time, nick, html, avatar, uid, posts, group, reputation }) =
                                 <img className="wh-110" src={`/assets/${avatar}.png`} alt="avatar" />
                             </Link>
                             <div className='position-absolute top-100 start-0 translate-middle'>
-                                <img src="/assets/awards/award_0.png" />
+                                <img src="/assets/awards/award_0.png" alt='awards'/>
                             </div>
                         </div>
                     </div>
