@@ -25,25 +25,18 @@ const Login = () => {
             {error && <div className="alert alert-danger" role="alert">{error}</div>}
             <div className="box">
                 <div className="p-2">
-                    <h3>Sign In</h3>
+                    <h3>Вход</h3>
                     <hr />
-                    <label className="form-label">Display Name or Email Address</label>
+                    <label className="form-label">Ваш ник или почта</label>
                     <div className="input-group mb-3">
-                        <input type="text" className="form-control" placeholder="Display Name or Email Address" value={email} onChange={event => setEmail(event.target.value)} />
+                        <input type="text" className="form-control" placeholder="Ваш ник или почта" value={email} onChange={event => setEmail(event.target.value)} />
                     </div>
-                    <label className="form-label">Password</label>
+                    <label className="form-label">Пароль</label>
                     <div className="input-group mb-3">
-                        <input type="password" className="form-control" placeholder="Password" value={password} onChange={event => setPassword(event.target.value)} />
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" />
-                        <label className="form-check-label">
-                            Remember me
-                        </label>
-                        <p>Not recommended on shared computers</p>
+                        <input type="password" className="form-control" placeholder="Пароль" value={password} onChange={event => setPassword(event.target.value)} />
                     </div>
                     <div className="text-center mb-3">
-                        <button onClick={onSendLogin} type="button" className="btn btn-secondary btn-lg">Sign In</button>
+                        <button onClick={onSendLogin} type="button" className="btn btn-secondary btn-lg">Войти</button>
                     </div>
                 </div>
             </div>
