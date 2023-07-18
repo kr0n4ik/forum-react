@@ -1,3 +1,4 @@
 # Realtime Forum Application
-Setup:
-- run ```npm i && npm start``` for both client and server side to start the development server
+Test:
+- run ```npm i && npm start``` in folder forum-react/server/ run server
+- run ```npm i && npm start``` in folder forum-react/ run client
